@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: CV-back
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cv
+    username: postgres
+    password: root
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+  port: 3300
