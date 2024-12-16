@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CVDto {
+    private Long id;
     private String  offer;
     private CandidateDto candidate;
     private List<LanguageDto> languages;

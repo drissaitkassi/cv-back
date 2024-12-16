@@ -8,8 +8,8 @@ public interface ICVService {
     List<CVDto> getAll();
     CVDto getById(Long id);
 
-    CVDto save();
+    CVDto save(CVDto cvDto);
 
 
-    CVDto update();
+    CVDto update(CVDto cvDto);
 }

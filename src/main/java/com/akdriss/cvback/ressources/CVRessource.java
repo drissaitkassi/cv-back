@@ -26,12 +26,12 @@ public class CVRessource {
 
     @PostMapping
     public CVDto save(@RequestBody CVDto cvDto){
-        return icvService.save();
+        return icvService.save(cvDto);
     }
 
     @PutMapping
     public CVDto update(@RequestBody CVDto cvDto){
-        return icvService.update();
+        return icvService.update(cvDto);
     }
 
 }
