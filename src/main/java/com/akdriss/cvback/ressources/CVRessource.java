@@ -20,7 +20,7 @@ public class CVRessource {
         return icvService.getAll();
     }
     @GetMapping("/{id}")
-    public List<CVDto> getById(@PathVariable(name = "id") Long id){
+    public CVDto getById(@PathVariable(name = "id") Long id){
         return icvService.getById(id);
     }
 

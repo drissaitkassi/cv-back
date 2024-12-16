@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ICVService {
     List<CVDto> getAll();
-    List<CVDto> getById(Long id);
+    CVDto getById(Long id);
 
     CVDto save();
 

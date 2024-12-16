@@ -20,6 +20,7 @@ public class User {
     private String firstName;
     private String lastName;
     private Gender gender ;
+    private String avatar;
     @OneToOne
     private Contact contact;
     @OneToMany(mappedBy = "candidate")

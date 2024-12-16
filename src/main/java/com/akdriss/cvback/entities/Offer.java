@@ -12,6 +12,7 @@ public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(mappedBy = "offer")
-    private CV cv;
+    private String name;
+    private String description;
+
 }

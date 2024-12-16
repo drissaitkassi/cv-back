@@ -14,8 +14,7 @@ public class CV {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
-    private Offer offer;
+    private String offer;
     @ManyToOne
     @JoinColumn(name = "candidate")
     private User candidate;

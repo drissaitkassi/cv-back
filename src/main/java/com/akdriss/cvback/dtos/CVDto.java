@@ -13,12 +13,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CVDto {
-    private Offer offer;
-    private User candidate;
-    private List<Language> languages;
-    private List<Experience> experiences;
-    private List<Skill> skills;
-    private List<Degree> degrees;
-    private List<Intrest> intrests;
-    private List<OtherSkill> otherSkills;
+    private String  offer;
+    private CandidateDto candidate;
+    private List<LanguageDto> languages;
+    private List<ExperienceDto> experiences;
+    private List<SkillDto> skills;
+    private List<DegreeDto> degrees;
+    private List<IntrestDto> intrests;
+    private List<OtherSkillDto> otherSkills;
 }

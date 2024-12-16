@@ -1,9 +1,16 @@
 package com.akdriss.cvback.mappers;
 
-public interface GenericMapper <T,D>{
+import java.util.List;
 
-    D toDto(T t);
-    T toEntity(D d);
+public interface GenericMapper <E,D>{
+
+    D toDto(E e);
+    E toEntity(D d);
+
+    List<D> toListDto(List<E> es);
+    List<E> toListEntities(List<D> ds);
+
+
 
 
 
