@@ -12,6 +12,7 @@ import java.util.UUID;
 @Setter
 @Table(name = "degree")
 public class Degree extends ElementInCategorie{
+    private String location;
     @ManyToOne
     @JoinColumn(name = "degrees")
     private CV cv;

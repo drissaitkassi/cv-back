@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CVRessource {
 
-    private ICVService icvService;
+    private final ICVService icvService;
 
     @GetMapping
     public List<CVDto> getAll(){

@@ -14,4 +14,5 @@ public class ExperienceDto {
     private String name;
     private String description;
     private Boolean rateable;
+    private String location;
 }

@@ -14,4 +14,5 @@ public class DegreeDto {
     private String name;
     private String description;
     private Boolean rateable;
+    private String location;
 }

@@ -28,6 +28,9 @@ public class CVServiceImpl implements ICVService{
 
     @Override
     public CVDto save(CVDto cvDto) {
+        //candidate is connected user  from token
+
+
         return cvMapper.toDto(cvRepository.save(cvMapper.toEntity(cvDto)));
     }
 

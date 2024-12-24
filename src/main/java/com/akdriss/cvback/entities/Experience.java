@@ -9,6 +9,8 @@ import lombok.Setter;
 @Setter
 @Table(name = "experience")
 public class Experience extends ElementInCategorie{
+
+    private String location;
     @ManyToOne
     @JoinColumn(name = "experiences")
     private CV cv;
