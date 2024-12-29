@@ -14,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Language extends ElementInCategorie{
     @ManyToOne
-    @JoinColumn(name = "languages")
+    @JoinColumn(name = "cv")
     private CV cv;
     @ManyToOne
     @JoinColumn(name = "elementRating")
