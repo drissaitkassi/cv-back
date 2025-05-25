@@ -15,6 +15,7 @@ public class DegreeMapper implements GenericMapper<Degree, DegreeDto> {
         degreeDto.setId(degree.getId());
         degreeDto.setName(degree.getName());
         degreeDto.setDescription(degree.getDescription());
+        degreeDto.setLocation(degree.getLocation());
         degreeDto.setRateable(degree.getRateable());
         return degreeDto;
     }
@@ -26,6 +27,7 @@ public class DegreeMapper implements GenericMapper<Degree, DegreeDto> {
         degree.setId(degreeDto.getId());
         degree.setName(degreeDto.getName());
         degree.setDescription(degreeDto.getDescription());
+        degree.setLocation(degreeDto.getLocation());
         degree.setRateable(degreeDto.getRateable());
         return degree;
     }

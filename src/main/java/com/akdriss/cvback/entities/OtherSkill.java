@@ -3,16 +3,14 @@ package com.akdriss.cvback.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "other_skill")
 public class OtherSkill extends ElementInCategorie{
-    @ManyToOne
-    @JoinColumn(name = "otherSkills")
-    private CV cv;
-    @ManyToOne
-    @JoinColumn(name = "elementRating")
-    private ElementRating elementRating;
+
+    @OneToMany
+    private List<OtherSkillRating> otherSkillRatingList;
 }

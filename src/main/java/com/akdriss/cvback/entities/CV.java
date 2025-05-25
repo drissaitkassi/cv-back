@@ -2,12 +2,15 @@ package com.akdriss.cvback.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+
 import java.util.List;
 
 
 @Entity
 @Getter
 @Setter
+@ToString
 @Table(name = "cv")
 public class CV {
 
@@ -15,20 +18,22 @@ public class CV {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String offer;
-    @ManyToOne
-    @JoinColumn(name = "candidate")
+    @OneToOne
+    @JoinColumn(name = "candidate_id",referencedColumnName = "id")
     private User candidate;
-    @OneToMany
-    private List<Language> languages;
-    @OneToMany
-    private List<Experience> experiences;
-    @OneToMany
-    private List<Skill> skills;
-    @OneToMany
+
+    @OneToMany(mappedBy = "cv")
     private List<Degree> degrees;
-    @OneToMany
+    @OneToMany(mappedBy = "cv")
     private List<Intrest> intrests;
+    @OneToMany(mappedBy = "cv")
+    private List<Experience> experiences;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<LanguageRating> languageRatingList;
     @OneToMany
-    private List<OtherSkill> otherSkills;
+    private List<SkillRating> skillRatingList;
+    @OneToMany
+    private List<OtherSkillRating> otherSkillRatingList;
 
 }

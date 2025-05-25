@@ -16,17 +16,19 @@ public class LanguageMapper implements GenericMapper<Language, LanguageDto> {
 
     @Override
     public LanguageDto toDto(Language language) {
-        return new LanguageDto(language.getId(), language.getName(), language.getDescription(), language.getRateable(),elementRatingMapper.toDto(language.getElementRating()));
+        return new LanguageDto(language.getId(), language.getName(), language.getDescription(), language.getRateable(),null);
     }
 
     @Override
     public Language toEntity(LanguageDto languageDto) {
         Language language = new Language();
         language.setId(languageDto.getId());
-        language.setElementRating(language.getElementRating());
-        language.setRateable(languageDto.getRateable());
         language.setName(languageDto.getName());
-        language.setElementRating(elementRatingMapper.toEntity(languageDto.getElementRatingDto()));
+        language.setDescription(languageDto.getDescription());
+        //language.setElementRating(language.getElementRating());
+        language.setRateable(languageDto.getRateable());
+
+        //language.setElementRating(elementRatingMapper.toEntity(languageDto.getElementRatingDto()));
         return language;
 
     }

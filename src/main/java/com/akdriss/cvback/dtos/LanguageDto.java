@@ -13,6 +13,6 @@ public class LanguageDto {
     private Long id;
     private String name;
     private String description;
-    private Boolean rateable;
+    private Boolean rateable = true;
     private ElementRatingDto elementRatingDto;
 }

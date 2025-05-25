@@ -52,7 +52,7 @@ public class CvBackApplication implements CommandLineRunner{
         english.setName("English");
         english.setRateable(true);
         english.setDescription("spoken and written english ");
-        english.setElementRating(null);
+
         Language savedEnglish = languageRepo.save(english);
 
         /**
@@ -63,7 +63,7 @@ public class CvBackApplication implements CommandLineRunner{
         frensh.setName("Frensh");
         frensh.setRateable(true);
         frensh.setDescription("spoken and written frensh");
-        frensh.setElementRating(null);
+
         Language savedFrensh = languageRepo.save(frensh);
 
         /**
@@ -74,7 +74,7 @@ public class CvBackApplication implements CommandLineRunner{
         spanish.setName("Spanish");
         spanish.setRateable(true);
         spanish.setDescription("spoken and written frensh");
-        spanish.setElementRating(null);
+
         Language savedSpanish = languageRepo.save(spanish);
 
         /**
@@ -86,7 +86,7 @@ public class CvBackApplication implements CommandLineRunner{
         german.setName("German");
         german.setRateable(true);
         german.setDescription("spoken and written frensh");
-        german.setElementRating(null);
+
         Language savedGerman = languageRepo.save(german);
 
 
@@ -95,7 +95,7 @@ public class CvBackApplication implements CommandLineRunner{
         languageRating1.setId(1L);
         languageRating1.setRating(1);
         languageRating1.setDescription("Elementary Proficiency");
-        languageRating1.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
+        //languageRating1.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
 
         ElementRating savedLanguageRating1 = elementRatingRepo.save(languageRating1);
 
@@ -104,7 +104,7 @@ public class CvBackApplication implements CommandLineRunner{
         languageRating2.setId(2L);
         languageRating2.setRating(2);
         languageRating2.setDescription("Limited Working Proficiency");
-        languageRating2.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
+        //languageRating2.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
 
         ElementRating savedLanguageRating2 = elementRatingRepo.save(languageRating2);
 
@@ -114,7 +114,7 @@ public class CvBackApplication implements CommandLineRunner{
         languageRating3.setId(3L);
         languageRating3.setRating(3);
         languageRating3.setDescription("Professional Working Proficiency");
-        languageRating3.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
+        //languageRating3.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
 
         ElementRating savedLanguageRating3 = elementRatingRepo.save(languageRating3);
 
@@ -122,7 +122,7 @@ public class CvBackApplication implements CommandLineRunner{
         languageRating4.setId(4L);
         languageRating4.setRating(4);
         languageRating4.setDescription("Full Professional Proficiency");
-        languageRating4.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
+        //languageRating4.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
 
         ElementRating savedLanguageRating4 = elementRatingRepo.save(languageRating4);
 
@@ -131,11 +131,65 @@ public class CvBackApplication implements CommandLineRunner{
         languageRating5.setId(5L);
         languageRating5.setRating(5);
         languageRating5.setDescription("Native / Bilingual Proficiency");
-        languageRating5.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
+        //languageRating5.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
 
         ElementRating savedLanguageRating5 = elementRatingRepo.save(languageRating5);
 
-    /*    savedEnglish.setElementRating(savedLanguageRating3);
+
+        /**
+         * generic rating
+         */
+        ElementRating  genericRating1=new ElementRating();
+        genericRating1.setId(6L);
+        genericRating1.setRating(1);
+        genericRating1.setDescription("Beginner | Little to no experience or knowledge in this skill.");
+        //genericRating1.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
+
+        ElementRating savedSkillRating1 = elementRatingRepo.save(genericRating1);
+
+        ElementRating  genericRating2=new ElementRating();
+        genericRating2.setId(7L);
+        genericRating2.setRating(2);
+        genericRating2.setDescription("Novice | Basic understanding and limited ability to perform the skill.");
+        //genericRating2.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
+
+        ElementRating savedSkillRating2 = elementRatingRepo.save(genericRating2);
+
+
+        ElementRating  genericRating3=new ElementRating();
+        genericRating3.setId(8L);
+        genericRating3.setRating(3);
+        genericRating3.setDescription("Intermediate | Functional knowledge and the ability to perform tasks with some independence.");
+        //genericRating3.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
+
+        ElementRating savedSkillRating3 = elementRatingRepo.save(genericRating3);
+
+        ElementRating  genericRating4=new ElementRating();
+        genericRating4.setId(9L);
+        genericRating4.setRating(4);
+        genericRating4.setDescription("Advanced | High level of proficiency and strong expertise in the skill.");
+        //genericRating4.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
+
+        ElementRating savedSkillRating4 = elementRatingRepo.save(genericRating4);
+
+        ElementRating  genericRating5=new ElementRating();
+        genericRating5.setId(10L);
+        genericRating5.setRating(5);
+        genericRating5.setDescription("Expert | Mastery of the skill, recognized as a leader or authority in the field.");
+        //genericRating4.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
+
+        ElementRating savedSkillRating5 = elementRatingRepo.save(genericRating5);
+
+    /*
+
+    Beginner | Little to no experience or knowledge in this skill.
+    Novice | Basic understanding and limited ability to perform the skill.
+    Intermediate | Functional knowledge and the ability to perform tasks with some independence.
+    Advanced | High level of proficiency and strong expertise in the skill.
+    Expert | Mastery of the skill, recognized as a leader or authority in the field.
+
+
+    savedEnglish.setElementRating(savedLanguageRating3);
         languageRepo.save(savedEnglish);
         savedFrensh.setElementRating(savedLanguageRating4);
         languageRepo.save(savedFrensh);
@@ -143,14 +197,6 @@ public class CvBackApplication implements CommandLineRunner{
         languageRepo.save(savedSpanish);
         savedGerman.setElementRating(savedLanguageRating1);
         languageRepo.save(savedGerman);*/
-
-
-
-
-
-
-
-
 
 
     }

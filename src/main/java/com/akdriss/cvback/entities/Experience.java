@@ -3,6 +3,7 @@ package com.akdriss.cvback.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
@@ -12,6 +13,6 @@ public class Experience extends ElementInCategorie{
 
     private String location;
     @ManyToOne
-    @JoinColumn(name = "experiences")
+    @JoinColumn(name = "cv_id")
     private CV cv;
 }

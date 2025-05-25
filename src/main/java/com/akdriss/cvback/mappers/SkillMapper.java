@@ -21,7 +21,7 @@ public class SkillMapper implements GenericMapper<Skill, SkillDto> {
         skillDto.setName(skill.getName());
         skillDto.setDescription(skill.getDescription());
         skillDto.setRateable(skill.getRateable());
-        skillDto.setElementRatingDto(elementRatingMapper.toDto(skill.getElementRating()));
+        //skillDto.setElementRatingDto(elementRatingMapper.toDto(skill.getElementRating()));
         return skillDto;
     }
 
@@ -33,7 +33,7 @@ public class SkillMapper implements GenericMapper<Skill, SkillDto> {
         skill.setName(skillDto.getName());
         skill.setDescription(skillDto.getDescription());
         skill.setRateable(skillDto.getRateable());
-        skill.setElementRating(elementRatingMapper.toEntity(skillDto.getElementRatingDto()));
+        //skill.setElementRating(elementRatingMapper.toEntity(skillDto.getElementRatingDto()));
         return skill;
 
     }

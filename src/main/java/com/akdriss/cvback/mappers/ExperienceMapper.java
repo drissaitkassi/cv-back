@@ -14,7 +14,8 @@ public class ExperienceMapper implements GenericMapper<Experience, ExperienceDto
         ExperienceDto experienceDto= new ExperienceDto();
         experienceDto.setRateable(experience.getRateable());
         experienceDto.setId(experience.getId());
-        experienceDto.setDescription(experienceDto.getDescription());
+        experienceDto.setDescription(experience.getDescription());
+        experienceDto.setLocation(experience.getLocation());
         experienceDto.setName(experience.getName());
         return experienceDto;
     }
@@ -26,6 +27,7 @@ public class ExperienceMapper implements GenericMapper<Experience, ExperienceDto
         experience.setName(experienceDto.getName());
         experience.setId(experienceDto.getId());
         experience.setDescription(experienceDto.getDescription());
+        experience.setLocation(experienceDto.getLocation());
         return experience;
     }
 

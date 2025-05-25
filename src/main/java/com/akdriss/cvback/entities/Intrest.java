@@ -10,6 +10,6 @@ import lombok.Setter;
 @Table(name = "interest")
 public class Intrest extends ElementInCategorie{
     @ManyToOne
-    @JoinColumn(name = "intrests")
+    @JoinColumn(name = "cv_id")
     private CV cv;
 }

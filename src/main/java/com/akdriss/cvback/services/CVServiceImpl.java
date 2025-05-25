@@ -2,15 +2,22 @@ package com.akdriss.cvback.services;
 
 import com.akdriss.cvback.dtos.CVDto;
 import com.akdriss.cvback.entities.*;
+import com.akdriss.cvback.enums.Gender;
 import com.akdriss.cvback.mappers.*;
 import com.akdriss.cvback.repositories.*;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CVServiceImpl implements ICVService{
 
     private final CVRepository cvRepository;
@@ -32,6 +39,9 @@ public class CVServiceImpl implements ICVService{
     private final ElementRatingRepo elementRatingRepo;
     private final UserRepo userRepo;
     private final ContactRepo contactRepo;
+    private final LanguageRatingRepo languageRatingRepo;
+    private final SkillRatingRepo skillRatingRepo;
+    private final OtherSkillRatingRepo otherSkillRatingRepo;
 
     @Override
     public List<CVDto> getAll() {
@@ -40,65 +50,132 @@ public class CVServiceImpl implements ICVService{
 
     @Override
     public CVDto getById(Long id) {
+        Optional<CV> cv1 = cvRepository.findById(id);
+        log.info(" result for cv byId {}",cv1.get().toString());
+
         return cvMapper.toDto(cvRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("CV NOT FOUND")));
     }
 
     @Override
     public CVDto save(CVDto cvDto) {
-        //candidate is connected user  from token
         CV cv=new CV();
-        Contact contact= contactRepo.save(getAthenticatedUser().getContact());
-
         User athenticatedUser = getAthenticatedUser();
-        athenticatedUser.setContact(contact);
-        User savedUser = userRepo.save(athenticatedUser);
 
 
         cv.setOffer(cvDto.getOffer());
-        cv.setCandidate(savedUser);
+        cv.setCandidate(athenticatedUser);
+
+        CV savedCv = cvRepository.save(cv);
+
 
         List<Language> languages=cvDto.getLanguages().stream().map(l -> {
-            Language language = languageMapper.toEntity(l);
-            ElementRating savedElementRating = elementRatingRepo.save(language.getElementRating());
-            language.setElementRating(savedElementRating);
+            Language language = null;
+            if (l.getId() != null){
+                Optional<Language> langById = languageRepo.findById(l.getId());
+
+                Optional<ElementRating> ratingById = elementRatingRepo.findById(l.getElementRatingDto().getId());
+
+                if (langById.isPresent() && ratingById.isPresent()){
+                    LanguageRating languageRating= new LanguageRating();
+                    languageRating.setCv(savedCv);
+                    languageRating.setLanguage(langById.get());
+                    languageRating.setElementRating(ratingById.get());
+                    languageRatingRepo.save(languageRating);
+                    language= langById.get();
+                }
+
+
+
+
+            }
            return language;
         }).toList();
 
-        languageRepo.saveAll(languages);
-        cv.setLanguages(languages);
-        List<Experience> experiences=experienceMapper.toListEntities(cvDto.getExperiences());
+
+
+
+        List<Skill> skills =cvDto.getSkills().stream().map(s -> {
+            Skill skill= null;
+            Optional<ElementRating> ratingById = elementRatingRepo.findById(s.getElementRatingDto().getId());
+
+            if (s.getId() != null){
+                Optional<Skill> skillById = skillRepo.findById(s.getId());
+
+
+                if (skillById.isPresent() && ratingById.isPresent()){
+                    SkillRating skillRating = new SkillRating();
+                    skillRating.setSkill(skillById.get());
+                    skillRating.setCv(savedCv);
+                    skillRating.setElementRating(ratingById.get());
+                    skillRatingRepo.save(skillRating);
+                    skill = skillById.get();
+
+                }}
+
+            return skill;
+        }).toList();
+
+
+
+        List<OtherSkill> otherSkills =cvDto.getOtherSkills().stream().map(s -> {
+            OtherSkill otherSkill= null;
+            Optional<ElementRating> ratingById = elementRatingRepo.findById(s.getElementRatingDto().getId());
+
+            if (s.getId() != null){
+                Optional<OtherSkill> skillById = otherSkillRepo.findById(s.getId());
+
+
+                if (skillById.isPresent() && ratingById.isPresent()){
+                    OtherSkillRating skillRating = new OtherSkillRating();
+                    skillRating.setOtherSkill(skillById.get());
+                    skillRating.setCv(savedCv);
+                    skillRating.setElementRating(ratingById.get());
+                    otherSkillRatingRepo.save(skillRating);
+                    otherSkill = skillById.get();
+
+                }}
+
+            return otherSkill;
+        }).toList();
+
+
+
+
+        /*
+         *
+         *  experiences
+         *  degree
+         *  interests
+         */
+
+
+        List<Experience> experiences=experienceMapper.toListEntities(cvDto.getExperiences()).stream().map(e -> {
+            e.setCv(savedCv);
+            return e;
+        }).toList();
         experienceRepo.saveAll(experiences);
         cv.setExperiences(experiences);
 
-        List<Skill> skills =cvDto.getSkills().stream().map(s -> {
-            Skill skill = skillMapper.toEntity(s);
-            ElementRating savedElementRating = elementRatingRepo.save(skill.getElementRating());
-            skill.setElementRating(savedElementRating);
-            return skill;
+        List<Degree> degrees =degreeMapper.toListEntities(cvDto.getDegrees()).stream().map(d -> {
+            d.setCv(savedCv);
+            return d;
         }).toList();
-        skillRepo.saveAll(skills);
-        cv.setSkills(skills);
-
-        List<Degree> degrees =degreeMapper.toListEntities(cvDto.getDegrees());
         degreeRepo.saveAll(degrees);
         cv.setDegrees(degrees);
-        List<Intrest> intrests=interestMapper.toListEntities(cvDto.getIntrests());
+
+
+        List<Intrest> intrests=interestMapper.toListEntities(cvDto.getIntrests()).stream().map(i -> {
+            i.setCv(savedCv);
+            return i;
+        }).toList();
         interestRepo.saveAll(intrests);
         cv.setIntrests(intrests);
 
-        List<OtherSkill> otherSkills=cvDto.getOtherSkills().stream().map(os -> {
-            OtherSkill otherSkill = otherSkillsMapper.toEntity(os);
-            ElementRating savedElementRating = elementRatingRepo.save(otherSkill.getElementRating());
-            otherSkill.setElementRating(savedElementRating);
-            return otherSkill;
-        }).toList();
-        otherSkillRepo.saveAll(otherSkills);
-        cv.setOtherSkills(otherSkills);
 
-        CV savedCV=cvRepository.save(cv);
+        //CV finalSavedCv=cvRepository.save(savedCv);
+        return cvMapper.toDto(savedCv);
 
 
-        return cvMapper.toDto(savedCV);
     }
 
     @Override
@@ -109,10 +186,18 @@ public class CVServiceImpl implements ICVService{
     public User getAthenticatedUser(){
         User u= new User();
         Contact c= new Contact();
+        //u.setId(5L);
         u.setFirstName("DRISS");
         u.setLastName("AITKASSI");
+        u.setGender(Gender.MALE);
         c.setEmail("driss.aitkassi@gmail.com");
-        u.setContact(c);
-        return u;
+        c.setAddress("fake address");
+        c.setPhone("+21232145");
+
+
+        Contact saved = contactRepo.save(c);
+        u.setContact(saved);
+
+        return userRepo.save(u);
     }
 }

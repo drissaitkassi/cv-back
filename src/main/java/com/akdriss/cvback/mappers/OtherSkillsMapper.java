@@ -20,7 +20,7 @@ public class OtherSkillsMapper implements GenericMapper<OtherSkill, OtherSkillDt
         otherSkillDto.setName(otherSkill.getName());
         otherSkillDto.setDescription(otherSkill.getDescription());
         otherSkillDto.setRateable(otherSkill.getRateable());
-        otherSkillDto.setElementRatingDto(elementRatingMapper.toDto(otherSkill.getElementRating()));
+        //otherSkillDto.setElementRatingDto(elementRatingMapper.toDto(otherSkill.getElementRating()));
         return otherSkillDto;
     }
 
@@ -32,7 +32,7 @@ public class OtherSkillsMapper implements GenericMapper<OtherSkill, OtherSkillDt
         otherSkill.setName(otherSkillDto.getName());
         otherSkill.setDescription(otherSkillDto.getDescription());
         otherSkill.setRateable(otherSkillDto.getRateable());
-        otherSkill.setElementRating(elementRatingMapper.toEntity(otherSkillDto.getElementRatingDto()));
+        //otherSkill.setElementRating(elementRatingMapper.toEntity(otherSkillDto.getElementRatingDto()));
         return otherSkill;
     }
 

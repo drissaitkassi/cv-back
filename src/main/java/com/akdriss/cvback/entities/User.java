@@ -23,8 +23,8 @@ public class User {
     private String avatar;
     @OneToOne
     private Contact contact;
-    @OneToMany(mappedBy = "candidate")
-    private List<CV> cvs;
+    @OneToOne(mappedBy = "candidate")
+    private CV cv;
     @OneToMany
     private List<Role> userRoles;
 

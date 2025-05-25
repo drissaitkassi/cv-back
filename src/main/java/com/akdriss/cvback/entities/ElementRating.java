@@ -3,9 +3,7 @@ package com.akdriss.cvback.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.List;
-import java.util.UUID;
 
 
 @Entity
@@ -18,12 +16,13 @@ public class ElementRating {
     private Long id;
     private int rating;
     private String description;
-    @OneToMany(mappedBy = "elementRating")
-    private List<Language> languages;
-    @OneToMany(mappedBy = "elementRating")
-    private List<Skill> skills;
-    @OneToMany(mappedBy = "elementRating")
-    private List<OtherSkill> otherSkills;
+
+    @OneToMany
+    private List<SkillRating> skillRatings;
+    @OneToMany
+    private List<OtherSkillRating> otherSkillRatings;
+    @OneToMany
+    private List<LanguageRating> languageRatingList;
 
 
 }

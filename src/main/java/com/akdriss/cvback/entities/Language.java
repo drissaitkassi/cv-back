@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.List;
 
 @Entity
 @Getter
@@ -13,10 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Language extends ElementInCategorie{
-    @ManyToOne
-    @JoinColumn(name = "cv")
-    private CV cv;
-    @ManyToOne
-    @JoinColumn(name = "elementRating")
-    private ElementRating elementRating;
+
+    @OneToMany
+    private List<LanguageRating> languageRatingList;
 }

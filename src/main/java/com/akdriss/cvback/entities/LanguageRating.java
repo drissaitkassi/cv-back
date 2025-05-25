@@ -1,21 +1,23 @@
 package com.akdriss.cvback.entities;
-
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-
+@Entity
 @Getter
 @Setter
-@MappedSuperclass
-public class ElementInCategorie {
+@Table(name = "lang_rating")
+public class LanguageRating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String description;
-    private Boolean rateable;
+    @ManyToOne
+    private CV cv;
+    @ManyToOne
+    private Language language;
+    @ManyToOne
+    private ElementRating elementRating;
+
 
 
 }

@@ -14,7 +14,7 @@ import java.util.UUID;
 public class Degree extends ElementInCategorie{
     private String location;
     @ManyToOne
-    @JoinColumn(name = "degrees")
+    @JoinColumn(name = "cv_id")
     private CV cv;
 
 
