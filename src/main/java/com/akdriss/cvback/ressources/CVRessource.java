@@ -2,13 +2,14 @@ package com.akdriss.cvback.ressources;
 
 
 import com.akdriss.cvback.dtos.CVDto;
+import com.akdriss.cvback.dtos.LanguageDto;
 import com.akdriss.cvback.services.ICVService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("v1/cv")
+@RequestMapping("v1/cv/toRemove")
 @RestController
 @RequiredArgsConstructor
 public class CVRessource {
@@ -25,13 +26,15 @@ public class CVRessource {
     }
 
     @PostMapping
-    public CVDto save(@RequestBody CVDto cvDto){
+    public CVDto saveCv(@RequestBody CVDto cvDto){
         return icvService.save(cvDto);
     }
-
     @PutMapping
     public CVDto update(@RequestBody CVDto cvDto){
         return icvService.update(cvDto);
     }
+
+
+
 
 }
