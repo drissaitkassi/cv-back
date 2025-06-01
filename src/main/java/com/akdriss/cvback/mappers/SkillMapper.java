@@ -29,6 +29,26 @@ public class SkillMapper implements GenericMapper<Skill, SkillDto> {
         return skillDto;
     }
 
+
+
+    @Override
+    public Skill toEntity(SkillDto skillDto) {
+
+        Skill skill= new Skill();
+        skill.setId(skillDto.getId());
+        skill.setName(skillDto.getName());
+        skill.setDescription(skillDto.getDescription());
+        skill.setRateable(skillDto.getRateable());
+        //skill.setElementRating(elementRatingMapper.toEntity(skillDto.getElementRatingDto()));
+        return skill;
+
+    }
+
+    @Override
+    public List<SkillDto> toListDto(List<Skill> skills) {
+        return skills.stream().map(this::toDto).collect(Collectors.toList());
+    }
+
     public SkillRefDto toRefDto(Skill skill) {
         SkillRefDto skillDto= new SkillRefDto();
         skillDto.setId(skill.getId());
@@ -51,24 +71,6 @@ public class SkillMapper implements GenericMapper<Skill, SkillDto> {
         skill.setRateable(skillDto.getRateable());
         return skill;
 
-    }
-
-    @Override
-    public Skill toEntity(SkillDto skillDto) {
-
-        Skill skill= new Skill();
-        skill.setId(skillDto.getId());
-        skill.setName(skillDto.getName());
-        skill.setDescription(skillDto.getDescription());
-        skill.setRateable(skillDto.getRateable());
-        //skill.setElementRating(elementRatingMapper.toEntity(skillDto.getElementRatingDto()));
-        return skill;
-
-    }
-
-    @Override
-    public List<SkillDto> toListDto(List<Skill> skills) {
-        return skills.stream().map(this::toDto).collect(Collectors.toList());
     }
 
 
