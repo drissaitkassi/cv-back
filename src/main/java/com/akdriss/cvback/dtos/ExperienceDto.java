@@ -1,5 +1,6 @@
 package com.akdriss.cvback.dtos;
 
+import com.akdriss.cvback.enums.Type;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,4 +16,5 @@ public class ExperienceDto {
     private String description;
     private Boolean rateable;
     private String location;
+    private Type type;
 }

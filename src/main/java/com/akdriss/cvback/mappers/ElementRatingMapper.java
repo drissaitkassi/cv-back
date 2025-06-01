@@ -14,6 +14,7 @@ public class ElementRatingMapper implements GenericMapper<ElementRating, Element
         elementRatingDto.setDescription(elementRating.getDescription());
         elementRatingDto.setRating(elementRating.getRating());
         elementRatingDto.setId(elementRating.getId());
+        elementRatingDto.setType(elementRating.getType());
         return elementRatingDto;
     }
 
@@ -23,17 +24,18 @@ public class ElementRatingMapper implements GenericMapper<ElementRating, Element
         elementRating.setDescription(elementRatingDto.getDescription());
         elementRating.setRating(elementRatingDto.getRating());
         elementRating.setId(elementRatingDto.getId());
+        elementRating.setType(elementRatingDto.getType());
         return elementRating;
 
     }
 
     @Override
     public List<ElementRatingDto> toListDto(List<ElementRating> elementRatings) {
-        return null;
+        return elementRatings.stream().map(this::toDto).toList();
     }
 
     @Override
     public List<ElementRating> toListEntities(List<ElementRatingDto> elementRatingDtos) {
-        return null;
+        return elementRatingDtos.stream().map(this::toEntity).toList();
     }
 }

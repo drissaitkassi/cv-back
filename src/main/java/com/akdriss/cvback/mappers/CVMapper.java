@@ -51,7 +51,7 @@ public class CVMapper implements GenericMapper<CV, CVDto> {
                 languageDto.setId(language.getId());
                 languageDto.setDescription(language.getDescription());
                 languageDto.setName(language.getName());
-                languageDto.setRateable(true);
+                languageDto.setRateable(language.getRateable());
                 languageDto.setElementRatingDto(elementRatingDto);
                 return languageDto;
             }).toList();
@@ -70,7 +70,7 @@ public class CVMapper implements GenericMapper<CV, CVDto> {
                 skillDto.setId(skill.getId());
                 skillDto.setName(skill.getName());
                 skillDto.setDescription(skill.getDescription());
-                skillDto.setRateable(true);
+                skillDto.setRateable(skill.getRateable());
                 skillDto.setElementRatingDto(elementRatingDto);
 
                 return skillDto;
@@ -93,7 +93,7 @@ public class CVMapper implements GenericMapper<CV, CVDto> {
                 otherSkillDto.setId(otherSkill.getId());
                 otherSkillDto.setName(otherSkill.getName());
                 otherSkillDto.setDescription(otherSkill.getDescription());
-                otherSkillDto.setRateable(true);
+                otherSkillDto.setRateable(otherSkill.getRateable());
                 otherSkillDto.setElementRatingDto(elementRatingDto);
 
                 return otherSkillDto;

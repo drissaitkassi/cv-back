@@ -1,5 +1,6 @@
 package com.akdriss.cvback.entities;
 
+import com.akdriss.cvback.enums.Type;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,8 @@ public class ElementRating {
     private Long id;
     private int rating;
     private String description;
+    @Enumerated(value = EnumType.STRING)
+    private Type type;
 
     @OneToMany
     private List<SkillRating> skillRatings;

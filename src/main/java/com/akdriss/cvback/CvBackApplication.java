@@ -2,6 +2,7 @@ package com.akdriss.cvback;
 
 import com.akdriss.cvback.entities.ElementRating;
 import com.akdriss.cvback.entities.Language;
+import com.akdriss.cvback.enums.Type;
 import com.akdriss.cvback.repositories.ElementRatingRepo;
 import com.akdriss.cvback.repositories.LanguageRepo;
 import com.akdriss.cvback.repositories.UserRepo;
@@ -95,18 +96,20 @@ public class CvBackApplication implements CommandLineRunner{
         languageRating1.setId(1L);
         languageRating1.setRating(1);
         languageRating1.setDescription("Elementary Proficiency");
+        languageRating1.setType(Type.LANGUAGE);
         //languageRating1.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
 
-        ElementRating savedLanguageRating1 = elementRatingRepo.save(languageRating1);
+        //ElementRating savedLanguageRating1 = elementRatingRepo.save(languageRating1);
 
 
         ElementRating  languageRating2=new ElementRating();
         languageRating2.setId(2L);
         languageRating2.setRating(2);
         languageRating2.setDescription("Limited Working Proficiency");
+        languageRating1.setType(Type.LANGUAGE);
         //languageRating2.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
 
-        ElementRating savedLanguageRating2 = elementRatingRepo.save(languageRating2);
+        //ElementRating savedLanguageRating2 = elementRatingRepo.save(languageRating2);
 
 
 
@@ -114,26 +117,25 @@ public class CvBackApplication implements CommandLineRunner{
         languageRating3.setId(3L);
         languageRating3.setRating(3);
         languageRating3.setDescription("Professional Working Proficiency");
+        languageRating1.setType(Type.LANGUAGE);
         //languageRating3.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
 
-        ElementRating savedLanguageRating3 = elementRatingRepo.save(languageRating3);
+        //ElementRating savedLanguageRating3 = elementRatingRepo.save(languageRating3);
 
         ElementRating  languageRating4=new ElementRating();
         languageRating4.setId(4L);
         languageRating4.setRating(4);
         languageRating4.setDescription("Full Professional Proficiency");
-        //languageRating4.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
+        languageRating1.setType(Type.LANGUAGE);
 
-        ElementRating savedLanguageRating4 = elementRatingRepo.save(languageRating4);
 
 
         ElementRating  languageRating5=new ElementRating();
         languageRating5.setId(5L);
         languageRating5.setRating(5);
         languageRating5.setDescription("Native / Bilingual Proficiency");
-        //languageRating5.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
+        languageRating1.setType(Type.LANGUAGE);
 
-        ElementRating savedLanguageRating5 = elementRatingRepo.save(languageRating5);
 
 
         /**
@@ -143,43 +145,47 @@ public class CvBackApplication implements CommandLineRunner{
         genericRating1.setId(6L);
         genericRating1.setRating(1);
         genericRating1.setDescription("Beginner | Little to no experience or knowledge in this skill.");
-        //genericRating1.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
+        languageRating1.setType(Type.OTHER);
 
-        ElementRating savedSkillRating1 = elementRatingRepo.save(genericRating1);
 
         ElementRating  genericRating2=new ElementRating();
         genericRating2.setId(7L);
         genericRating2.setRating(2);
         genericRating2.setDescription("Novice | Basic understanding and limited ability to perform the skill.");
-        //genericRating2.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
+        languageRating1.setType(Type.OTHER);
 
-        ElementRating savedSkillRating2 = elementRatingRepo.save(genericRating2);
 
 
         ElementRating  genericRating3=new ElementRating();
         genericRating3.setId(8L);
         genericRating3.setRating(3);
         genericRating3.setDescription("Intermediate | Functional knowledge and the ability to perform tasks with some independence.");
-        //genericRating3.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
+        languageRating1.setType(Type.OTHER);
 
-        ElementRating savedSkillRating3 = elementRatingRepo.save(genericRating3);
 
         ElementRating  genericRating4=new ElementRating();
         genericRating4.setId(9L);
         genericRating4.setRating(4);
         genericRating4.setDescription("Advanced | High level of proficiency and strong expertise in the skill.");
-        //genericRating4.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
+        languageRating1.setType(Type.OTHER);
 
-        ElementRating savedSkillRating4 = elementRatingRepo.save(genericRating4);
 
         ElementRating  genericRating5=new ElementRating();
         genericRating5.setId(10L);
         genericRating5.setRating(5);
         genericRating5.setDescription("Expert | Mastery of the skill, recognized as a leader or authority in the field.");
-        //genericRating4.setLanguages(Stream.of(savedEnglish).collect(Collectors.toList()));
+        languageRating1.setType(Type.OTHER);
 
-        ElementRating savedSkillRating5 = elementRatingRepo.save(genericRating5);
 
+        List<ElementRating> ratings = List.of(languageRating1, languageRating2, languageRating3, languageRating4, languageRating5, genericRating1, genericRating2, genericRating3, genericRating4, genericRating5);
+        List<ElementRating> ratingsToSave = ratings.stream().peek((r) -> {
+            if (r.getId() <= 5L) {
+                r.setType(Type.LANGUAGE);
+            } else {
+                r.setType(Type.OTHER);
+            }
+        }).toList();
+        elementRatingRepo.saveAll(ratingsToSave);
     /*
 
     Beginner | Little to no experience or knowledge in this skill.

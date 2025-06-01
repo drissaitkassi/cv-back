@@ -1,18 +1,22 @@
 package com.akdriss.cvback.dtos;
 
-import com.akdriss.cvback.enums.Type;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ElementRatingDto {
+public class OtherSkillRefDto {
+
     private Long id;
-    private int rating;
+    private String name;
     private String description;
-    private Type type;
+    private Boolean rateable;
+    private List<ElementRatingDto> elementRatingDtos;
 }
