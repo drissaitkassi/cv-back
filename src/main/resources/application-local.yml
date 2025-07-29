@@ -27,6 +27,6 @@ spring:
       chat:
         options:
           model: gpt-4o
-      api-key: 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
+      api-key: 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
 server:
   port: 3300

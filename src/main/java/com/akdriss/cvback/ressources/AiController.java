@@ -35,10 +35,10 @@ public class AiController {
     }
 
     @GetMapping("suggest")
-    public CVDto suggestCv(@RequestParam Long  cvId){
+    public ResponseEntity<CVDto> suggestCv(@RequestParam Long  cvId) throws JsonProcessingException {
+        PromptTemplate pt= new PromptTemplate(aiCVSuggestionPromptTemplate);
 
-
-        return null;
+        return ResponseEntity.ok(iAiService.suggestCvPrompt(pt,cvId));
     }
 
 
